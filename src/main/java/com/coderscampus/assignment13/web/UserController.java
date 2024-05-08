@@ -1,8 +1,7 @@
 package com.coderscampus.assignment13.web;
 
-import java.util.Arrays;
-import java.util.Set;
-
+import com.coderscampus.assignment13.domain.User;
+import com.coderscampus.assignment13.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.coderscampus.assignment13.domain.User;
-import com.coderscampus.assignment13.service.UserService;
+import java.util.Arrays;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -20,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/register")
-    public String getCreateUser (ModelMap model) {
+    public String getCreateUser(ModelMap model) {
 
         model.put("user", new User());
 
@@ -28,14 +27,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postCreateUser (User user) {
+    public String postCreateUser(User user) {
         System.out.println(user);
         userService.saveUser(user);
         return "redirect:/register";
     }
 
     @GetMapping("/users")
-    public String getAllUsers (ModelMap model) {
+    public String getAllUsers(ModelMap model) {
         Set<User> users = userService.findAll();
 
         model.put("users", users);
@@ -47,7 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public String getOneUser (ModelMap model, @PathVariable Long userId) {
+    public String getOneUser(ModelMap model, @PathVariable Long userId) {
         User user = userService.findById(userId);
         model.put("users", Arrays.asList(user));
         model.put("user", user);
@@ -55,13 +54,13 @@ public class UserController {
     }
 
     @PostMapping("/users/{userId}")
-    public String postOneUser (User user) {
+    public String postOneUser(User user) {
         userService.saveUser(user);
-        return "redirect:/users/"+user.getUserId();
+        return "redirect:/users/" + user.getUserId();
     }
 
     @PostMapping("/users/{userId}/delete")
-    public String deleteOneUser (@PathVariable Long userId) {
+    public String deleteOneUser(@PathVariable Long userId) {
         userService.delete(userId);
         return "redirect:/users";
     }
