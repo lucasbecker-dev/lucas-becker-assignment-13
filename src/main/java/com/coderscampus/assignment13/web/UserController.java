@@ -65,4 +65,11 @@ public class UserController {
         userService.delete(userId);
         return "redirect:/users";
     }
+
+    @PostMapping("/users/{userId}/accounts")
+    public String postCreateAccount(@PathVariable Long userId) {
+        // TODO: complete this method
+        User user = userService.findById(userId);
+        return "redirect:/users/" + user.getUserId();
+    }
 }
