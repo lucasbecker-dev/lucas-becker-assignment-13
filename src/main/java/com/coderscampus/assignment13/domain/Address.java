@@ -13,6 +13,20 @@ public class Address {
     private String country;
     private String zipCode;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "userId=" + userId +
+                ", user=" + user +
+                ", addressLine1='" + addressLine1 + '\'' +
+                ", addressLine2='" + addressLine2 + '\'' +
+                ", city='" + city + '\'' +
+                ", region='" + region + '\'' +
+                ", country='" + country + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
+
     @Id
     public Long getUserId() {
         return userId;
@@ -22,14 +36,16 @@ public class Address {
         this.userId = userId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) { this.user = user; }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Column(length = 200)
     public String getAddressLine1() {

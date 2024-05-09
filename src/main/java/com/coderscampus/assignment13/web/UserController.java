@@ -1,5 +1,6 @@
 package com.coderscampus.assignment13.web;
 
+import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String postCreateUser(User user) {
-        System.out.println(user);
         userService.saveUser(user);
         return "redirect:/register";
     }
@@ -39,7 +39,8 @@ public class UserController {
 
         model.put("users", users);
         if (users.size() == 1) {
-            model.put("user", users.iterator().next());
+            User user = users.iterator().next();
+            model.put("user", user);
         }
 
         return "users";
@@ -48,8 +49,10 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public String getOneUser(ModelMap model, @PathVariable Long userId) {
         User user = userService.findById(userId);
+        Address address = user.getAddress();
         model.put("users", Arrays.asList(user));
         model.put("user", user);
+        model.put("address", address);
         return "users";
     }
 
@@ -63,12 +66,5 @@ public class UserController {
     public String deleteOneUser(@PathVariable Long userId) {
         userService.delete(userId);
         return "redirect:/users";
-    }
-
-    @PostMapping("/users/{userId}/accounts")
-    public String postCreateAccount(@PathVariable Long userId) {
-        // TODO: complete this method
-        User user = userService.findById(userId);
-        return "redirect:/users/" + user.getUserId();
     }
 }

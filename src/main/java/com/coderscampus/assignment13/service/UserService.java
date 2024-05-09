@@ -1,5 +1,6 @@
 package com.coderscampus.assignment13.service;
 
+import com.coderscampus.assignment13.domain.Account;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.repository.AccountRepository;
 import com.coderscampus.assignment13.repository.UserRepository;
@@ -49,19 +50,6 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-//        if (user.getUserId() == null) {
-//            Account checking = new Account();
-//            checking.setAccountName("Checking Account");
-//            checking.getUsers().add(user);
-//            Account savings = new Account();
-//            savings.setAccountName("Savings Account");
-//            savings.getUsers().add(user);
-//
-//            user.getAccounts().add(checking);
-//            user.getAccounts().add(savings);
-//            accountRepo.save(checking);
-//            accountRepo.save(savings);
-//        }
         return userRepo.save(user);
     }
 

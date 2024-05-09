@@ -1,16 +1,16 @@
 package com.coderscampus.assignment13.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
 public class Account {
     private Long accountId;
     private String accountName;
-    private List<Transaction> transactions = new ArrayList<>();
-    private List<User> users = new ArrayList<>();
+    private Set<Transaction> transactions = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,21 +31,21 @@ public class Account {
         this.accountName = accountName;
     }
 
-    @OneToMany(mappedBy = "account")
-    public List<Transaction> getTransactions() {
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    public Set<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
+    public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
     }
 
     @ManyToMany(mappedBy = "accounts")
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 }

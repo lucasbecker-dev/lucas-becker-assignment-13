@@ -7,7 +7,7 @@
 <h1>Users</h1>
 
 <div th:if="${#lists.size(users) == 1}">
-    <form action="" method="post">
+    <form method="post" th:action="@{/users/{userId}(userId=${user.userId})}">
         <div>
             Username: <input th:field="${user.username}" type="text"/>
         </div>
@@ -43,9 +43,22 @@
     <form method="post" th:action="@{/users/{userId}/delete(userId=${user.userId})}">
         <input type="submit" value="Delete User Account"/>
     </form>
-    <form>
-
+    <form method="post" th:action="@{/users/{userId}/accounts(userId=${user.userId})}">
+        <div>
+            <h2>Accounts</h2>
+        </div>
+        <div th:each="account : ${user.accounts}">
+            <a th:href="@{'/users/' + ${user.userId} + '/accounts/' + ${account.accountId}}">
+                <span th:text="${account.accountName}"></span>
+            </a>
+        </div>
+        <div>
+            <input type="submit" value="Create New Bank Account"/>
+        </div>
     </form>
+    <div>
+        <a th:href="@{/users}">Back</a>
+    </div>
 </div>
 
 <div th:each="user : ${users}" th:unless="${#lists.size(users) == 1}">
@@ -54,7 +67,8 @@
     <span th:text="${user.name}"></span><br/>
     <span th:text="${user.password}"></span>
     <div th:each="account : ${user.accounts}">
-        <a th:href="@{'/users/' + ${user.userId}}" th:text="${account.accountName}"></a>
+        <a th:href="@{'/users/' + ${user.userId} + '/accounts/' + ${account.accountId}}"
+           th:text="${account.accountName}"></a>
     </div>
     <hr/>
 </div>
