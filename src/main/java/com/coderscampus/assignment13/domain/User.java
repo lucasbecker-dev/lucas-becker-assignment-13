@@ -70,7 +70,7 @@ public class User {
         this.accounts = accounts;
     }
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     public Address getAddress() {
         return address;
     }

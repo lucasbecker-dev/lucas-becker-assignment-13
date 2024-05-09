@@ -22,16 +22,14 @@ public class Address {
         this.userId = userId;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setUser(User user) { this.user = user; }
 
     @Column(length = 200)
     public String getAddressLine1() {
