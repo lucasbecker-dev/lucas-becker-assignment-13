@@ -76,8 +76,23 @@ public class User {
     }
 
     public void setAddress(Address address) {
+        // If the address passed to the method is null, it checks if the current User object (this) already has an
+        // Address associated with it. If it does, it disassociates the User from the Address by setting the User of
+        // the Address to null. This is done to ensure data consistency when you want to remove the Address from a User
+        if (address == null) {
+            if (this.address != null) {
+                this.address.setUser(null);
+            }
+        } else {
+            // If the address passed to the method is not null, it associates the User with the Address by calling
+            // address.setUser(this). This sets the User of the Address to the current User object (this).
+            address.setUser(this);
+        }
+        // Finally, it sets the Address of the User to the address passed to the method. This could be a new Address
+        // object or null, depending on what was passed to the method.
         this.address = address;
     }
+
 
     @Override
     public String toString() {
