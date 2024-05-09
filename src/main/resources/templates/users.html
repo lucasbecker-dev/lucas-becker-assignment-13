@@ -49,7 +49,7 @@
 </div>
 
 <div th:each="user : ${users}" th:unless="${#lists.size(users) == 1}">
-    <span th:text="${user.userId}"></span><br/>
+    <a th:href="@{'/users/' + ${user.userId}}" th:text="${user.userId}"></a><br/>
     <span th:text="${user.username}"></span><br/>
     <span th:text="${user.name}"></span><br/>
     <span th:text="${user.password}"></span>
