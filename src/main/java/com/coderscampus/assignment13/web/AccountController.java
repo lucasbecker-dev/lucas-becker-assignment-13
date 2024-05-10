@@ -42,6 +42,6 @@ public class AccountController {
     public String postUpdateAccount(Account account, @PathVariable Long userId) {
         User user = userService.findById(userId);
         Account savedAccount = accountService.saveAccount(account);
-        return "redirect:/users/" +  user.getUserId() + "/accounts/" + savedAccount.getAccountId();
+        return "redirect:/users/" + user.getUserId() + "/accounts/" + savedAccount.getAccountId();
     }
 }

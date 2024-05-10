@@ -2,9 +2,7 @@ package com.coderscampus.assignment13.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity // Class name = User, DB Table name = user
