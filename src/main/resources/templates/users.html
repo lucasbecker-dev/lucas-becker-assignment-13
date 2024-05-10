@@ -56,11 +56,12 @@
             <input type="submit" value="Create New Bank Account"/>
         </div>
     </form>
+    <hr/>
     <div>
         <a th:href="@{/users}">Back</a>
     </div>
 </div>
-
+<div>
 <div th:each="user : ${users}" th:unless="${#lists.size(users) == 1}">
     <a th:href="@{'/users/' + ${user.userId}}" th:text="${user.userId}"></a><br/>
     <span th:text="${user.username}"></span><br/>
@@ -72,5 +73,10 @@
     </div>
     <hr/>
 </div>
+<div>
+    <a th:href="@{/register/}">Register New User</a>
+</div>
+</div>
+
 </body>
 </html>
