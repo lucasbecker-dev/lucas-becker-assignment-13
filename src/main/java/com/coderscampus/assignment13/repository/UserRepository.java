@@ -23,6 +23,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByCreatedDateBetween(LocalDate date1, LocalDate date2);
 
+    @Query("select u from User u where userId = :userId")
+    User findByUserId(Long userId);
+
     @Query("select u from User u where username = :username")
     List<User> findExactlyOneUserByUsername(String username);
 
