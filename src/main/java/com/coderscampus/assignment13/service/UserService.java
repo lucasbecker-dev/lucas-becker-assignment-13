@@ -1,6 +1,7 @@
 package com.coderscampus.assignment13.service;
 
 import com.coderscampus.assignment13.domain.Account;
+import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.repository.AccountRepository;
 import com.coderscampus.assignment13.repository.UserRepository;
@@ -51,6 +52,25 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepo.save(user);
+    }
+
+    public User updateUserAndAddress(User updatedUser) {
+        User existingUser = userRepo.findById(updatedUser.getUserId()).orElse(new User());
+
+        Address existingAddress = existingUser.getAddress();
+        if (existingAddress == null) {
+            existingAddress = new Address();
+            existingUser.setAddress(existingAddress);
+        }
+
+        existingAddress.setAddressLine1(updatedUser.getAddress().getAddressLine1());
+        existingAddress.setAddressLine2(updatedUser.getAddress().getAddressLine2());
+        existingAddress.setCity(updatedUser.getAddress().getCity());
+        existingAddress.setRegion(updatedUser.getAddress().getRegion());
+        existingAddress.setCountry(updatedUser.getAddress().getCountry());
+        existingAddress.setZipCode(updatedUser.getAddress().getZipCode());
+
+        return userRepo.save(existingUser);
     }
 
     public void delete(Long userId) {
