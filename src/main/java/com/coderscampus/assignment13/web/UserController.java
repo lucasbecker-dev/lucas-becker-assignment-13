@@ -16,8 +16,12 @@ import java.util.Set;
 @Controller
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String getCreateUser(ModelMap model) {
