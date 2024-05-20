@@ -26,4 +26,14 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
 
+    public void setAddress(Address address) {
+        if (address == null) {
+            if (this.address != null) {
+                this.address.setUser(null);
+            }
+        } else {
+            address.setUser(this);
+        }
+        this.address = address;
+    }
 }
