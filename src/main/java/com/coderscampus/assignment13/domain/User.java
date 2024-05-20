@@ -1,6 +1,6 @@
 package com.coderscampus.assignment13.domain;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,13 +11,15 @@ import java.util.Set;
 @Entity // Class name = User, DB Table name = user
 @Table(name = "users")
 public class User {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
     private String password;
     private String name;
     private LocalDate createdDate;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)@JoinTable(name = "user_account",
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_account",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Set<Account> accounts = new HashSet<>();
