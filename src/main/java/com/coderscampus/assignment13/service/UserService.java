@@ -15,10 +15,12 @@ import java.util.Set;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepo;
+
     @Autowired
-    private AccountRepository accountRepo;
+    public UserService(UserRepository userRepo, AccountService accountService) {
+        this.userRepo = userRepo;
+    }
 
     public List<User> findByUsername(String username) {
         return userRepo.findByUsername(username);
